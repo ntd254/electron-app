@@ -12,8 +12,8 @@ const WINDOW_SIZE = {
   }
 } as const
 
-let trayApp: Tray | null = null
-let trayWindow: BrowserWindow | null = null
+export let trayApp: Tray | null = null
+export let trayWindow: BrowserWindow | null = null
 
 export function initTray(): void {
   trayApp = new Tray(appIcon)
@@ -83,8 +83,12 @@ function alignWindow(): void {
   const trayBounds = trayApp.getBounds()
   const windowBounds = trayWindow.getBounds()
 
-  const x = Math.round(trayBounds.x + trayBounds.width / 2 - windowBounds.width / 2)
-  const y = Math.round(trayBounds.y + trayBounds.height + WINDOW_SIZE.margin.y)
+  console.log(trayBounds, windowBounds)
+
+  const x = trayBounds.x + trayBounds.width / 2 - windowBounds.width / 2
+  const y = trayBounds.y + trayBounds.height
+
+  console.log({ x, y })
 
   trayWindow.setPosition(x, y)
   // const position = calculateWindowPosition()
