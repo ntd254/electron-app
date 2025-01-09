@@ -1,25 +1,15 @@
-import electronLogo from './assets/electron.svg'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import Main from './window/Main'
+import Tray from './window/Tray'
 
 function App(): JSX.Element {
   return (
-    <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-      </div>
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path="/tray" element={<Tray />} />
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </HashRouter>
   )
 }
 

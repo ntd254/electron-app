@@ -1,8 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
-// import { initTray } from './tray-window'
 import { createWindow } from './window'
-import { initTray, trayApp } from './tray-window'
+import { createTray } from './tray'
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -22,7 +21,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
-  initTray()
+  createTray()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -36,7 +35,6 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    trayApp?.destroy()
     app.quit()
   }
 })
