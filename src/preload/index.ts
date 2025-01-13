@@ -1,7 +1,14 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  get: (key: string): Promise<any> => {
+    return ipcRenderer.invoke('get', key)
+  },
+  set: (key: string, value: any): void => {
+    return ipcRenderer.send('set', key, value)
+  }
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
@@ -16,3 +23,5 @@ if (process.contextIsolated) {
   // @ts-ignore (define in dts)
   window.api = api
 }
+
+export type ApiRenderer = typeof api
