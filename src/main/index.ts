@@ -2,7 +2,6 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow } from './window'
 import { createTray } from './tray'
-import './store'
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
